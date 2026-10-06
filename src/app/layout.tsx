@@ -7,7 +7,6 @@ import AnnouncementBar from "@/components/AnnouncementBar";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
 
 // Google Fonts: Cormorant Garamond (headings) + Jost (body).
 // Loaded with a <link> tag so the build doesn't need network access to Google.
@@ -34,7 +33,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <main className="min-h-[60vh]">{children}</main>
           <Footer />
           <CartDrawer />
-          <WhatsAppFloat />
         </CartProvider>
       </body>
     </html>

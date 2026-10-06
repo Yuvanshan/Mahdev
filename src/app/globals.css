@@ -2,16 +2,16 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand palette – change these to restyle the whole site */
-  --color-plum: #6b2f63;
-  --color-plum-dark: #55244f;
-  --color-blush: #f6e8ec;
-  --color-lilac: #d9c2e8;
-  --color-cream: #fbf8f7;
-  --color-ink: #2a1f2b;
-  --color-muted: #7a6b78;
-  --color-line: #ece3e6;
-  --color-wa: #1da851; /* WhatsApp-style green with enough contrast for white text */
+  /* Mahdev's forest, ivory and warm-gold palette */
+  --color-plum: #20372e;
+  --color-plum-dark: #304d40;
+  --color-blush: #eee9df;
+  --color-lilac: #e8c991;
+  --color-cream: #faf9f6;
+  --color-ink: #252e29;
+  --color-muted: #77746d;
+  --color-line: #e8e4dc;
+  --color-wa: #20372e;
 
   --font-serif: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
   --font-sans: "Jost", "Avenir Next", "Segoe UI", system-ui, sans-serif;
@@ -72,13 +72,22 @@ h1, h2, h3 { text-wrap: balance; }
 
 /* Slowly shifting gradient behind the hero text */
 .hero-gradient {
-  background: linear-gradient(120deg, #6b2f63, #a2679a, #d9c2e8, #8a4a80);
+  background: linear-gradient(120deg, #20372e, #496550, #b79559, #304d40);
   background-size: 300% 300%;
   animation: hero-shift 14s ease infinite;
+}
+ .event-hero-image {
+  background-image: url("https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=2200&q=90");
+  background-position: center 55%;
+  background-size: cover;
 }
 @keyframes hero-shift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
+}
+
+@media (max-width: 640px) {
+  .event-hero-image { background-position: 58% center; }
 }
 
 @media (prefers-reduced-motion: reduce) {

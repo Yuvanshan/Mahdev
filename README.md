@@ -1,18 +1,8 @@
-# Aurelle – WhatsApp Fashion Store (Next.js)
+# Mahdev Pvt Ltd — Event Management
 
-A women's fashion storefront built with **Next.js 15 (App Router)**, **React 19**, **TypeScript** and **Tailwind CSS v4**.
-Customers browse, add items to a bag and **place every order through WhatsApp**. The site takes no payments and has no backend.
+A responsive event-management website for Mahdev Pvt Ltd, built with **Next.js 15**, **React 19**, **TypeScript** and **Tailwind CSS v4**.
 
-## Features
-
-- Home: rotating announcement bar, hero, benefits strip, category tiles, new arrivals, sale banner, best sellers, "how to order" steps
-- Collections: category / size / price filters, search, sorting, deep links (`/collections?category=dresses`)
-- Product pages: gallery, colour, size and quantity pickers, related items, **Order this on WhatsApp**
-- Bag drawer: quantity changes, free-delivery progress, totals
-- Checkout: delivery form with Sri Lankan mobile validation and all 25 districts, then WhatsApp opens with the order filled in
-- Wishlist, Lookbook, About, Help/FAQ with a size guide, Contact (sends through WhatsApp), 404
-- A floating WhatsApp chat button on every page
-- The bag and wishlist are saved in the browser (localStorage)
+The home page introduces the company, its corporate and private event services, its planning approach and a call to enquire. Visitors can send an event enquiry through WhatsApp from the contact page.
 
 ## Getting started
 
@@ -27,22 +17,13 @@ npm start        # serve the production build
 
 | What | Where |
 | --- | --- |
-| Brand name, **WhatsApp number**, contact details, delivery fee, announcements, menu | `src/config/site.ts` |
-| Products and categories | `src/data/products.ts` |
-| Colours and fonts | `src/app/globals.css` (`@theme` block) and `src/app/layout.tsx` |
-| WhatsApp message format | `src/lib/whatsapp.ts` |
+| Company name, contact details, WhatsApp number and navigation | `src/config/site.ts` |
+| Home page content and event imagery | `src/app/page.tsx` and `src/components/Hero.tsx` |
+| Colours and fonts | `src/app/globals.css` and `src/app/layout.tsx` |
+| Event enquiry message | `src/app/contact/ContactForm.tsx` |
 
-- **WhatsApp number:** digits only, in international format without `+` (for example `94771234567`).
-- **Product photos:** put images in `public/products/` and set `image: "/products/your-file.jpg"` on each product. Until then, gradient placeholders are shown.
-- **Hero video:** add `public/hero.mp4` and set `heroVideo: "/hero.mp4"` in `site.ts`.
-
-## How a WhatsApp order works
-
-1. The customer adds items to the bag and taps **Order on WhatsApp**.
-2. They fill in their name, mobile number, address, city and district.
-3. WhatsApp opens (`wa.me`) with a formatted message listing the items, sizes, colours, quantities, subtotal, delivery fee, total and delivery details.
-4. The customer taps **Send**. The shop confirms stock and payment (cash on delivery or bank transfer) in the chat.
+Set `whatsappNumber` in `src/config/site.ts` to the company's real number in international format (digits only) before publishing the enquiry form.
 
 ## Deploy
 
-Deploys as-is to Vercel, Netlify or any Node host. Every page is pre-rendered as static content.
+Builds as a Next.js application and can be deployed to Vercel or any Node.js host.

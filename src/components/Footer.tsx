@@ -1,52 +1,37 @@
-// Site footer (TSX).
 import Link from "next/link";
 import { site } from "@/config/site";
-import { waLink } from "@/lib/whatsapp";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-line mt-16">
-      <div className="mx-auto max-w-7xl px-4 py-12 grid gap-8 grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr_1.2fr] text-sm">
-        <div className="col-span-2 md:col-span-1">
-          <p className="font-serif text-2xl text-plum tracking-wide">{site.name}</p>
-          <p className="text-muted mt-2 max-w-xs">{site.description}</p>
-          <div className="flex gap-4 mt-4 text-muted">
-            <a href={site.socials.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-plum">Facebook</a>
-            <a href={site.socials.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-plum">Instagram</a>
-            <a href={site.socials.tiktok} target="_blank" rel="noopener noreferrer" className="hover:text-plum">TikTok</a>
-          </div>
-        </div>
-
-        <FooterCol title="Shop" links={[["All collections", "/collections"], ["New arrivals", "/new-arrivals"], ["Sale", "/collections?category=sale"], ["Lookbook", "/lookbook"]]} />
-        <FooterCol title="Help" links={[["How to order", "/faq"], ["Delivery & exchanges", "/faq"], ["Size guide", "/faq"], ["Contact us", "/contact"]]} />
-
+    <footer className="bg-[#17251f] text-white">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-14 sm:px-10 md:grid-cols-[1.5fr_1fr_1fr] lg:px-12 lg:py-20">
         <div>
-          <h4 className="footer-h">Get in touch</h4>
-          <ul className="grid gap-2 text-muted">
-            <li>{site.contact.address}</li>
-            <li><a href={waLink(`Hello ${site.name}!`)} target="_blank" rel="noopener noreferrer" className="hover:text-plum">WhatsApp: {site.contact.phone}</a></li>
-            <li>{site.contact.email}</li>
-            <li>{site.contact.hours}</li>
+          <Link href="/" className="font-serif text-3xl tracking-wide">MAHDEV</Link>
+          <p className="mt-1 text-[10px] uppercase tracking-[0.28em] text-[#e8c991]">Pvt Ltd · Event management</p>
+          <p className="mt-5 max-w-sm text-sm leading-6 text-white/60">{site.description}</p>
+        </div>
+        <div>
+          <h2 className="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-[#e8c991]">Discover</h2>
+          <ul className="grid gap-3 text-sm text-white/75">
+            <li><Link href="/#services" className="transition hover:text-white">Our services</Link></li>
+            <li><Link href="/#experiences" className="transition hover:text-white">Our work</Link></li>
+            <li><Link href="/#about" className="transition hover:text-white">About Mahdev</Link></li>
           </ul>
         </div>
+        <div>
+          <h2 className="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-[#e8c991]">Start a conversation</h2>
+          <p className="max-w-xs text-sm leading-6 text-white/60">Have a date, a big idea, or just a feeling you want to bring to life? We&apos;d love to hear about it.</p>
+          <Link href="/contact" className="mt-5 inline-flex items-center gap-2 text-sm text-white transition hover:text-[#e8c991]">
+            Tell us about your event <span aria-hidden="true">↗</span>
+          </Link>
+        </div>
       </div>
-      <div className="mx-auto max-w-7xl px-4 py-5 border-t border-line flex flex-wrap justify-between gap-2 text-xs text-muted">
-        <span>© {new Date().getFullYear()} {site.name}. All rights reserved.</span>
-        <span>Order on WhatsApp · Cash on delivery · Bank transfer</span>
+      <div className="border-t border-white/10">
+        <div className="mx-auto flex max-w-7xl flex-wrap justify-between gap-2 px-6 py-5 text-xs text-white/45 sm:px-10 lg:px-12">
+          <span>© {new Date().getFullYear()} Mahdev Pvt Ltd. All rights reserved.</span>
+          <span>Thoughtfully planned. Unforgettable by design.</span>
+        </div>
       </div>
     </footer>
-  );
-}
-
-function FooterCol({ title, links }: { title: string; links: [string, string][] }) {
-  return (
-    <div>
-      <h4 className="footer-h">{title}</h4>
-      <ul className="grid gap-2 text-muted">
-        {links.map(([label, href]) => (
-          <li key={label}><Link href={href} className="hover:text-plum">{label}</Link></li>
-        ))}
-      </ul>
-    </div>
   );
 }

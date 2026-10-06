@@ -2,10 +2,10 @@
 // Change the values here to rebrand the whole site in one place.
 
 export const site = {
-  name: "Aurelle", // Placeholder brand name – replace with your own
-  tagline: "Feminine fashion, made affordable",
+  name: "Mahdev Pvt Ltd",
+  tagline: "Thoughtfully planned. Unforgettable by design.",
   description:
-    "Aurelle brings thoughtfully curated women's fashion to your doorstep – modern silhouettes, soft fabrics and prices that make sense.",
+    "Mahdev Pvt Ltd plans and produces thoughtful, beautifully executed events—from intimate celebrations to standout corporate experiences.",
   currency: "LKR",
 
   // WhatsApp number that receives every order.
@@ -31,18 +31,16 @@ export const site = {
   },
   // Messages that rotate in the top announcement bar
   announcements: [
-    "Island-wide delivery on every order",
-    "Order easily on WhatsApp",
-    "Cash on delivery available",
-    "New arrivals every Friday",
+    "Bringing people together, beautifully",
+    "Corporate events · Weddings · Celebrations",
+    "Thoughtful planning. Seamless execution.",
   ],
   nav: [
     { label: "Home", href: "/" },
-    { label: "Collections", href: "/collections" },
-    { label: "New Arrivals", href: "/new-arrivals" },
-    { label: "Lookbook", href: "/lookbook" },
-    { label: "About Us", href: "/about" },
-    { label: "Contact Us", href: "/contact" },
+    { label: "Services", href: "/#services" },
+    { label: "Our Work", href: "/#experiences" },
+    { label: "About", href: "/#about" },
+    { label: "Contact", href: "/#contact" },
   ],
 } as const;
 
