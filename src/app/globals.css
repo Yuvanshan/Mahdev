@@ -1,26 +1,86 @@
+/* Global styles (CSS, Tailwind v4). Brand colours and fonts are defined once in @theme. */
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Brand palette – change these to restyle the whole site */
+  --color-plum: #6b2f63;
+  --color-plum-dark: #55244f;
+  --color-blush: #f6e8ec;
+  --color-lilac: #d9c2e8;
+  --color-cream: #fbf8f7;
+  --color-ink: #2a1f2b;
+  --color-muted: #7a6b78;
+  --color-line: #ece3e6;
+  --color-wa: #1da851; /* WhatsApp-style green with enough contrast for white text */
+
+  --font-serif: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Jost", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+
+  --animate-fade: fade 0.5s ease both;
+  --animate-rise: rise 0.8s ease both;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@keyframes fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html { scroll-behavior: smooth; }
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+h1, h2, h3 { text-wrap: balance; }
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-plum px-6 py-3 text-sm font-medium text-white transition hover:bg-plum-dark;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-current px-6 py-3 text-sm font-medium transition hover:bg-white hover:text-ink;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-ink/30 px-6 py-3 text-sm font-medium transition hover:border-plum hover:text-plum;
+  }
+  .btn-whatsapp {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-wa px-6 py-3 text-sm font-semibold text-white transition hover:brightness-110;
+  }
+  .badge {
+    @apply rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-widest;
+  }
+  .eyebrow {
+    @apply text-xs uppercase tracking-[0.25em] text-plum;
+  }
+  .footer-h {
+    @apply mb-3 text-xs font-semibold uppercase tracking-[0.16em];
+  }
+  .input {
+    @apply w-full rounded-xl border border-line bg-white px-3.5 py-2.5 outline-none focus:border-plum focus:ring-2 focus:ring-plum/20;
+  }
+  .chip {
+    @apply rounded-full border border-line bg-white px-3 py-1 text-sm transition hover:border-plum;
+  }
+  .chip-on {
+    @apply border-plum bg-plum text-white;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Slowly shifting gradient behind the hero text */
+.hero-gradient {
+  background: linear-gradient(120deg, #6b2f63, #a2679a, #d9c2e8, #8a4a80);
+  background-size: 300% 300%;
+  animation: hero-shift 14s ease infinite;
+}
+@keyframes hero-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }

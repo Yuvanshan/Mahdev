@@ -1,103 +1,78 @@
-import Image from "next/image";
+// Home page (TSX).
+import Link from "next/link";
+import Hero from "@/components/Hero";
+import Features from "@/components/Features";
+import CategoryGrid, { SectionTitle } from "@/components/CategoryGrid";
+import ProductCard from "@/components/ProductCard";
+import ProductImage from "@/components/ProductImage";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
+import { products, newArrivals, getProduct } from "@/data/products";
+import { site } from "@/config/site";
+import { waLink } from "@/lib/whatsapp";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const fresh = newArrivals().slice(0, 4);
+  const sale = getProduct("floral-tiered-maxi")!;
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
+  return (
+    <>
+      <Hero />
+      <Features />
+      <CategoryGrid />
+
+      {/* New arrivals */}
+      <section className="mx-auto max-w-7xl px-4 pb-16">
+        <SectionTitle eyebrow="Just landed" title="New Arrivals" />
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8">
+          {fresh.map((p) => <ProductCard key={p.slug} p={p} />)}
+        </div>
+        <div className="text-center mt-10"><Link href="/new-arrivals" className="btn-outline">View all new arrivals</Link></div>
+      </section>
+
+      {/* Sale banner */}
+      <section className="mx-auto max-w-7xl px-4">
+        <div className="grid md:grid-cols-2 rounded-3xl overflow-hidden bg-plum text-white">
+          <div className="p-8 sm:p-12 flex flex-col justify-center items-start gap-4">
+            <p className="text-xs uppercase tracking-[0.25em] text-white/80">Mid-season sale</p>
+            <h2 className="font-serif text-4xl sm:text-5xl">Up to 25% off selected styles</h2>
+            <p className="text-white/85">Dresses, outerwear and accessories, while sizes last.</p>
+            <Link href="/collections?category=sale" className="inline-flex rounded-full bg-white text-plum px-6 py-3 text-sm font-medium">Shop the sale</Link>
+          </div>
+          <ProductImage name="" tones={sale.tones} image={sale.image} className="aspect-[4/3] md:aspect-auto md:min-h-[360px]" />
+        </div>
+      </section>
+
+      {/* Best sellers (first 8 items – reorder in data/products.ts) */}
+      <section className="mx-auto max-w-7xl px-4 py-16">
+        <SectionTitle eyebrow="Customer favourites" title="Best Sellers" />
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8">
+          {products.slice(0, 8).map((p) => <ProductCard key={p.slug} p={p} />)}
+        </div>
+      </section>
+
+      {/* How ordering works */}
+      <section className="mx-auto max-w-7xl px-4">
+        <div className="rounded-3xl bg-blush px-6 py-12 text-center">
+          <p className="eyebrow">Simple ordering</p>
+          <h2 className="font-serif text-3xl sm:text-4xl mt-2">Order in three easy steps</h2>
+          <ol className="grid sm:grid-cols-3 gap-6 mt-8 max-w-4xl mx-auto text-left">
+            {[
+              ["Add to bag", "Pick your size and colour, then add your favourites to the bag."],
+              ["Send on WhatsApp", "Enter your delivery details and we open WhatsApp with your order ready to send."],
+              ["We confirm & deliver", "We reply to confirm stock and total, then deliver island-wide. Pay cash on delivery or by bank transfer."],
+            ].map(([t, d], i) => (
+              <li key={t} className="bg-white rounded-2xl p-5">
+                <span className="font-serif text-3xl text-plum">{i + 1}</span>
+                <h3 className="font-medium mt-1">{t}</h3>
+                <p className="text-sm text-muted mt-1">{d}</p>
+              </li>
+            ))}
+          </ol>
+          <a href={waLink(`Hello ${site.name}! I'd like some help choosing.`)} target="_blank" rel="noopener noreferrer" className="btn-whatsapp mt-8">
+            <WhatsAppIcon /> Chat with us
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+    </>
   );
 }
